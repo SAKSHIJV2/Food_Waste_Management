@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annaseva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            padding-top: 160px;
+            background: #EFF3EA;
+            color: #4A4A4A;
+        }
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        header {
+            width: 100%;
+            height: 150px; 
+            background:#FFBD73;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+            position: fixed; /* Keeps header in place */
+            top: 0; /* Stays at the top */
+            left: 0;
+            z-index: 1000; /* Ensures it stays above other elements */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+            animation: slideDown 0.8s ease-out;
+        }
+        header:hover {
+            background: #FFA947; /* Slightly darker shade */
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+            transform: scale(1.02);
+            transition: all 0.3s ease-in-out;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite alternate;
+        }
+
+        .logo h1 {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 50px;
+            margin: 0;
+            color: black;
+
+        }
+        .donate-btn {
+            font-size: 18px;
+            background-color: lightyellow;
+            color: darkslategray;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+            margin-right: 180px;
+            text-decoration: none;
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .donate-btn:hover {
+            background-color: #FFD700;
+            transform: scale(1.1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .auth {
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: lightyellow;
+            color: darkslategray;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .auth:hover {
+            background-color: #FFD700;
+            transform: scale(1.1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-container {
+            position: relative;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .main-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://th.bing.com/th/id/R.370aa60401cc81ce02b1e68829cf41eb?rik=dxJeGHIffNjg6A&riu=http%3a%2f%2fwww.livewellmagazine.org%2fwp-content%2fuploads%2f2012%2f09%2fWhole-grains.jpg&ehk=%2flqcYCMj%2b68lrsfMtnhazb%2b3JzuO1ml971FS8Ph1X6M%3d&risl=&pid=ImgRaw&r=0");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(50%);
+            
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 165, 0, 0.3);
+            backdrop-filter: blur(2px) /* Transparent white shade */
+        }
+        .main-content h1{
+            position: relative;
+            z-index: 2; 
+            font-size:100px ;
+            font-weight: bolder;
+            max-width: 60%;
+            padding: 20px;
+            align-items: center;
+            color:#FFD700; /* Bright golden color */
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Glow effect */
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+            
+        }
+        .main-content h4{
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            width: 80%;
+            margin-left: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 50px 20px;
+            flex-wrap: wrap;
+        }
+
+        .container > div {
+            width: 250px;
+            height: 250px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            font-size: 18px;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.5s ease-in-out forwards;
+            animation-delay: var(--delay);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .container > div:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .objective-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: whitesmoke;
+            
+            margin: 30px auto;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.5s ease-in-out forwards;
+        }
+
+        .objective-section h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .objective-section p {
+            font-size: 18px;
+            max-width: 80%;
+            margin: 0 auto;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .first-box {
+            background: #FCFFC1;
+            --delay: 0.2s;
+        }
+        .first-box h2{
+            color: #A31D1D !important;
+        }
+        .second-box {
+            background: #A1EEBD;
+            --delay: 0.4s;
+        }
+        .second-box h2{
+            color: #3E7B27 !important;
+        }
+        .third-box {
+            background: #B1F0F7;
+            --delay: 0.6s;
+        }
+        .third-box h2{
+            color: #003092 !important;
+        }
+        .fourth-box {
+            background: #FFE2E2;
+            --delay: 0.8s;
+        }
+        .fourth-box h2{
+            color: #AC1754 !important;
+        }
+        .first-box, .second-box, .third-box, .fourth-box {
+            animation: fadeInUp 0.8s ease-in-out var(--delay) both;
+            transition: height 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            padding: 20px;
+            height: 150px !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .container h2 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .container h4 {
+            font-size: 16px;
+            color: #555;
+        }
+
+        @keyframes foldCorner {
+            0% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+            100% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 90% 90%, 0% 100%);
+            }
+        }
+
+        @keyframes unfoldCorner {
+            0% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 90% 90%, 0% 100%);
+            }
+            100% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+        }
+        .folded {
+            animation: foldCorner 0.3s ease-in-out forwards;
+        }
+
+        /* Reverse Fold when clicked again */
+        .unfolded {
+            animation: unfoldCorner 0.3s ease-in-out forwards;
+        }
+        .first-box:hover, .second-box:hover, .third-box:hover, .fourth-box:hover {
+            transition: all 0.3s ease-in-out;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            cursor: pointer;
+        }
+        .first-box { --delay: 0.2s; }
+        .second-box { --delay: 0.4s; }
+        .third-box { --delay: 0.6s; }
+        .fourth-box { --delay: 0.8s; }
+        footer {
+            background-color: black;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            padding: 20px;
+            min-width: 300px;
+        }
+
+        .footer-section h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: gold;
+        }
+
+        .footer-section p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header shrink effect */
+        header {
+            transition: height 0.3s ease-in-out;
+        }
+
+        /* Button click animation */
+        .auth {
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .auth.clicked {
+            transform: scale(1.1);
+            background-color: lightgreen;
+        }
+
+        /* Footer hover effect */
+        .footer-section:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./logo.jpg" alt="logo image">
+            <h1>Annseva</h1>
+        </div>
+        <a href="loginpage.html" class="donate-btn">Donate Now</a>
+        <a href="loginpage.html" class="auth">Login/Signup</a> 
+    </header>
+
+    <div class="main-container">
+        <div class="overlay"></div>
+        <div class="main-content">
+        <h1>Ready to join hands?</h1>
+        <h4>What if the major industries, food-sharing organizations, and active citizens could come
+            together to reduce the amount of food being wasted in our country?
+        </h4>
+        </div>
+    </div>
+    <div class="objective-section">
+        <h1>Our Mission: No Food Wasted, No Stomach Empty</h1>
+        <p>We strive to bridge the gap between surplus food and hungry lives by promoting responsible sharing and kindness.</p>
+    </div>
+    
+    <div class="container">
+        <div class="first-box">
+            <h2>"Hunger Ends Where Sharing Begins!"</h2>
+            <h4> Join hands to fight food wastage and feed the hungry</h4>
+        </div>
+        <div class="second-box">
+            <h2>Reduce Waste</h2>
+            <h4>Redirect surplus food to those in need.</h4>
+        </div>
+        <div class="third-box">
+            <h2>Build Community</h2>
+            <h4>Encourage collective food-sharing efforts.</h4>
+        </div>
+        <div class="fourth-box">
+            <h2>Spread Kindness</h2>
+            <h4>Turn excess food into hope and smiles</h4>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h2>About Us</h2>
+                <p>Annaseva is dedicated to reducing food waste and ensuring that no stomach goes empty. We connect surplus food with those in need, promoting a culture of sharing and kindness.</p>
+            </div>
+            <div class="footer-section contact">
+                <h2>Contact Us</h2>
+                <p><strong>Phone:</strong> +91 70383 29615</p>
+                <p><strong>Email:</strong> contact@annaseva.org</p>
+                <p><strong>Address:</strong> AISSMS IOIT, Pune</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Annaseva | All Rights Reserved</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const fadeInElements = document.querySelectorAll(".fade-in");
+            const header = document.querySelector("header");
+            const authButton = document.querySelector(".auth");
+
+            // Smooth fade-in on scroll
+            function revealElements() {
+                fadeInElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add("visible");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", revealElements);
+            revealElements(); // Trigger on page load
+
+            // Header shrink effect on scroll
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 50) {
+                    header.style.height = "100px";
+                } else {
+                    header.style.height = "150px";
+                }
+            });
+
+            // Cool hover effect for authentication button
+            authButton.addEventListener("click", function () {
+                authButton.classList.add("clicked");
+                setTimeout(() => {
+                    authButton.classList.remove("clicked");
+                }, 500);
+            });
+        });
+        document.querySelectorAll('.first-box, .second-box, .third-box, .fourth-box').forEach(box => {
+            box.addEventListener('click', function () {
+                if (this.classList.contains('folded')) {
+                    this.classList.remove('folded');
+                    this.classList.add('unfolded');
+                } else {
+                    this.classList.remove('unfolded');
+                    this.classList.add('folded');
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

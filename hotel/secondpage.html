@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second page</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            align-items: center;
+            background-color:#D8EFD3!important;
+        }
+        .main-container{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            margin-top:100px;
+            padding: 130px 20px 20px 10px;
+            gap: 70px;
+        }
+        .hotel{
+            height: 200px;
+            width:200px ;
+            padding: 10px 20px;
+            align-items: center;
+            display: flex;
+            border-radius: 5%;
+            background:radial-gradient(circle, #E3ECFF 30%, #A3C1FF 100%);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+            color: #2D336B;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        a {
+            text-decoration: none; /* Removes blue underline */
+            color: inherit; /* Keeps text color same */
+        }
+        .hotel h1{
+            display: block;
+            margin-left: 30px;
+            font-size: 60px;
+            
+        }
+        .Ngo{
+            height: 200px;
+            width:200px;
+            padding: 10px 20px;
+            align-items: center;
+            display: flex;
+            border-radius: 5%;
+            background: radial-gradient(circle, #DFFBE1 30%, #9FD9A4 100%);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+            color: #09122C;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .Ngo h1{
+            display: block;
+            margin-left: 30px;
+            font-size: 60px;
+        }
+        .hotel:hover, .Ngo:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <a href="loginpage.html"><div class="hotel">
+            <h1>Hotel</h1>
+        </div></a>
+        <a href="loginpage.html"><div class="Ngo">
+            <h1>NGO</h1>
+        </div></a>
+    </div>
+</body>
+</html>

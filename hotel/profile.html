@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Annseva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1E3C72, #2A5298);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Animation - Hotel Skyline */
+        .hotel-skyline {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            background: url('https://i.imgur.com/jTnYNvI.png') repeat-x;
+            animation: moveSkyline 10s linear infinite;
+        }
+
+        @keyframes moveSkyline {
+            0% { background-position: 0 0; }
+            100% { background-position: -1000px 0; }
+        }
+
+        /* Profile Container */
+        .profile-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            width: 50%;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: floating 3s infinite ease-in-out;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 26px;
+        }
+
+        .input-box, .donation-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-box::placeholder, .donation-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .input-box:focus, .donation-input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        .donation-input {
+            background: white;
+            color: black;
+            border: 1px solid #ccc;
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+            appearance: textfield; /* Ensures proper text input behavior */
+        }
+        .donation-input option {
+            background: white;
+            color: black;
+        }
+
+        /* Initially hide the dropdown */
+        #donationCount {
+            display: none;
+        }
+
+        /* Save Button */
+        .save-btn {
+            background: white;
+            color: #2196F3;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .save-btn:hover {
+            background: #E91E63;
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Profile Form -->
+    <div class="profile-container">
+        <h2>Hotel Profile</h2>
+        <input type="text" class="input-box" placeholder="Hotel Name">
+        <input type="text" class="input-box" placeholder="Address">
+        <input type="tel" class="input-box" placeholder="Phone No">
+        <input type="text" class="input-box" placeholder="Years in Service">
+        
+        <!-- Donation Section -->
+        <div class="donation-section">
+            <label>Donations Done?</label><br>
+            <input type="radio" name="donation" class="donation-radio" value="yes" onclick="toggleDonationInput(true)"> Yes
+            <input type="radio" name="donation" class="donation-radio" value="no" onclick="toggleDonationInput(false)"> No
+        </div>
+
+    </div>
+
+    <!-- Hotel Skyline Animation -->
+    <div class="hotel-skyline"></div>
+
+
+</body>
+</html>

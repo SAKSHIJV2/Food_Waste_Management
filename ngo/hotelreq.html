@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Hotel request and information of hotel
+        </title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            /* Sidebar Styling */
+            .sidebar {
+                width: 270px;
+                height: 100vh;
+                position: fixed;
+                left: 0;
+                top: 56px;
+                background-color:#34495E;
+                padding: 20px;
+                color:#ffffff;
+                /* border-color:black; */
+            }
+    
+            /* Main Content Area */
+            .main-content {
+                margin-left: 280px;
+                padding: 20px;
+                margin-top: 56px;
+            }
+    
+            /* Fixed Header */
+            .header {
+                width: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 1000;
+                background-color: #2C3E50;
+            }
+    
+            /* Hover Effect */
+            .hover-effect:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+                transition: 0.3s;
+            }
+    
+            .btn-primary-light {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                transition: 0.3s ease-in-out;
+            }
+    
+            .btn-primary-light:hover {
+                background-color: white;
+                color: black;
+                box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+            }
+    
+            .btn-warning:hover {
+                background-color: white;
+                color: black;
+                box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+            }
+    
+            /* Dropdown Styling */
+            .dropdown-menu {
+                min-width: 120px;
+            }
+            .logo{
+                border-radius:50%;
+            }
+            .bgimage {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+            }
+            .bgimage img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0.3;
+            }
+            .request-section {
+                position:absolute;
+                left: 280px; /* Align with sidebar */
+                top: 100px; /* Avoid overlapping header */
+                padding: 40px;
+                min-height: 80vh; /* Ensures longer height */
+            }
+            .list-group {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        </style>
+    </head>
+<body>
+        <header class="header p-3 text-bg-dark">
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <!-- Logo -->
+                <a href="/" class="d-flex align-items-center text-white text-decoration-none">
+                    <img src="annseva.jpg " alt="Logo" width="40" height="40"  class="logo me-3">
+                    <h1><span class="fs-4 ms-2" > Annseva</span></h1>
+                </a>
+                <form action="/AnnSeva/php_files/logout.php" method="POST">
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+                   
+            </div>
+        </header>
+        
+        <!-- Sidebar -->
+        <section class="sidebars">
+            <div class="sidebar d-flex flex-column">
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li><a href="/AnnSeva/ngo/ngo.html" class="nav-link text-white hover-effect">Home</a></li>
+                    <li><a href="./hotelreq.html" class="nav-link text-blue bg-light text-dark">Hotel Request</a></li>
+                    
+                    <li><a href="#" class="nav-link text-white hover-effect">Contact Us</a></li>
+                </ul>
+                <hr>
+            </div>
+        </section>
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <section>
+            <div class="bgimage">
+                <img src="fd1.jpg" alt="food">
+            </div>
+        </section>
+        <!--list-->
+        <section>
+            <div class="d-flex flex-column flex-md-row p-4 gap-5 px-md-3 py-md-5 align-items-center justify-content-center">
+                <div class="list-group list-group-checkable d-grid gap-2 border-0" id="hotelList"></div>
+                <div class="px-5" id="foodChart" class="mt-4"></div>
+              </div>
+        </section>
+          
+        <script>
+            // Step 1: Load hotel list first (from get_hotels_with_food.php)
+            fetch('/AnnSeva/php_files/get_hotels_with_food.php')
+                .then(response => response.json())
+                .then(data => {
+                    const hotelList = document.getElementById('hotelList');
+                    const foodChart = document.getElementById('foodChart');
+                    hotelList.innerHTML = ''; // clear any existing content
+        
+                    data.forEach((hotel, index) => {
+                        const inputId = `hotelRadio${index}`;
+                        hotelList.innerHTML += `
+                            <input class="list-group-item-check" type="radio" name="hotelRadios" id="${inputId}" value="${hotel.hotel_id}">
+                            <label class="list-group-item rounded-3 py-3" for="${inputId}">
+                                ${hotel.fullName}
+                                <span class="d-block small opacity-50">Hotel ID: ${hotel.hotel_id}</span>
+                            </label>
+                        `;
+                    });
+        
+                    // Step 2: Add event listener only after hotels are loaded
+                    hotelList.addEventListener('change', function (e) {
+                        if (e.target && e.target.matches('input[type="radio"][name="hotelRadios"]')) {
+                            const selectedHotelId = e.target.value;
+                            window.location.href = `/AnnSeva/ngo/foodchart.php?hotel_id=${selectedHotelId}`;
+
+        
+                            // Step 3: Fetch food chart for the selected hotel
+                            fetch(`/AnnSeva/php_files/get_food_chart.php?hotel_id=${selectedHotelId}`)
+                                .then(response => response.json())
+                                .then(foodData => {
+                                    if (foodData.length === 0) {
+                                        foodChart.innerHTML = `<div class="alert alert-warning">No food chart available for this hotel.</div>`;
+                                        return;
+                                    }
+        
+                                    let chartHTML = `
+                                        <h4 class="mb-3">Food Chart</h4>
+                                        <table class="table table-bordered table-hover bg-white">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th>Food Item</th>
+                                                    <th>Quantity</th>
+                                                    <th>Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                    `;
+        
+                                    foodData.forEach(item => {
+                                        chartHTML += `
+                                            <tr>
+                                                <td>${item.food_name}</td>
+                                                <td>${item.quantity}</td>
+                                                <td>${item.time}</td>
+                                            </tr>
+                                        `;
+                                    });
+        
+                                    chartHTML += `</tbody></table>`;
+                                    foodChart.innerHTML = chartHTML;
+                                })
+                                .catch(err => {
+                                    foodChart.innerHTML = `<div class="alert alert-danger">Error loading food chart.</div>`;
+                                    console.error(err);
+                                });
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading hotels:', error);
+                });
+                fetch('/AnnSeva/php_files/get_orders.php')
+                .then(res => res.json())
+                .then(data => {
+                    const ordersDiv = document.getElementById('orders');
+                    let content = `<h3>NGO Orders</h3><ul class="list-group">`;
+                    data.forEach(order => {
+                        content += `<li class="list-group-item">NGO: ${order.ngo_username}, Contact: ${order.contact}</li>`;
+                    });
+                    content += '</ul>';
+                    ordersDiv.innerHTML = content;
+                });
+
+        </script>          
+    </body>
+</html>
